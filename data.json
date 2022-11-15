@@ -1,0 +1,32 @@
+{
+  "BTC": {
+    "value": "16,923.68",
+    "percentage": "1.71%",
+    "rise": true
+  },
+  "ETH": {
+    "value": "1,272.26",
+    "percentage": "2.10%",
+    "rise": true
+  },
+  "BNB": {
+    "value": "278,70",
+    "percentage": "0.16%",
+    "rise": true
+  },
+  "XRP": {
+    "value": "0,39",
+    "percentage": "2.84%",
+    "rise": true
+  },
+  "USDT": {
+    "value": "0.9970",
+    "percentage": "-0.003%",
+    "rise": false
+  },
+  "TRY": {
+    "value": "0,054",
+    "percentage": "-0.06%",
+    "rise": false
+  }
+}

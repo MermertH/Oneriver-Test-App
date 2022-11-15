@@ -24,8 +24,8 @@ const Tabs = () => {
           headerShown: false,
           tabBarIcon: ({focused}) => {
             var icon = focused
-              ? require('OneriverApp/src/images/home_icon_focused.png')
-              : require('OneriverApp/src/images/home_icon_unfocused.png');
+              ? require('OneriverApp/src/images/tabs/home_icon_focused.png')
+              : require('OneriverApp/src/images/tabs/home_icon_unfocused.png');
             return <Image source={icon} style={{width: 37.5, height: 32}} />;
           },
         }}
@@ -37,8 +37,8 @@ const Tabs = () => {
           headerShown: false,
           tabBarIcon: ({focused}) => {
             var icon = focused
-              ? require('OneriverApp/src/images/wallet_icon_focused.png')
-              : require('OneriverApp/src/images/wallet_icon_unfocused.png');
+              ? require('OneriverApp/src/images/tabs/wallet_icon_focused.png')
+              : require('OneriverApp/src/images/tabs/wallet_icon_unfocused.png');
             return <Image source={icon} style={{width: 28, height: 32}} />;
           },
         }}

@@ -13,7 +13,7 @@ const AuthScreen = ({navigation}) => {
     <View style={styles.scaffold}>
       <Image
         style={styles.image}
-        source={require('OneriverApp/src/images/oneriver_icon.png')}
+        source={require('OneriverApp/src/images/auth/oneriver_icon.png')}
       />
       <Text style={styles.welcomeText}>Welcome to Oneriver</Text>
       <View>
