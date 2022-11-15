@@ -12,8 +12,6 @@ const Tabs = () => {
       initialRouteName="Home"
       screenOptions={({route}) => ({
         tabBarShowLabel: false,
-        tabBarActiveTintColor: 'white',
-        tabBarInactiveTintColor: 'white',
         tabBarStyle: {
           backgroundColor: '#1A4184',
           height: 56,
@@ -25,16 +23,10 @@ const Tabs = () => {
         options={{
           headerShown: false,
           tabBarIcon: ({focused}) => {
-            return (
-              <Image
-                source={
-                  focused
-                    ? require('OneriverApp/src/images/home_icon_focused.png')
-                    : require('OneriverApp/src/images/home_icon_unfocused.png')
-                }
-                style={{width: 37.5, height: 32}}
-              />
-            );
+            var icon = focused
+              ? require('OneriverApp/src/images/home_icon_focused.png')
+              : require('OneriverApp/src/images/home_icon_unfocused.png');
+            return <Image source={icon} style={{width: 37.5, height: 32}} />;
           },
         }}
       />
@@ -44,16 +36,10 @@ const Tabs = () => {
         options={{
           headerShown: false,
           tabBarIcon: ({focused}) => {
-            return (
-              <Image
-                source={
-                  focused
-                    ? require('OneriverApp/src/images/wallet_icon_focused.png')
-                    : require('OneriverApp/src/images/wallet_icon_unfocused.png')
-                }
-                style={{width: 28, height: 32}}
-              />
-            );
+            var icon = focused
+              ? require('OneriverApp/src/images/wallet_icon_focused.png')
+              : require('OneriverApp/src/images/wallet_icon_unfocused.png');
+            return <Image source={icon} style={{width: 28, height: 32}} />;
           },
         }}
       />
