@@ -1,8 +1,9 @@
 import * as React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import AuthScreen from './screens/Auth/AuthScreen';
-import HomeScreen from './screens/Home/HomeScreen';
+import AuthScreen from './src/screens/Auth/AuthScreen';
+import Tabs from './src/screens/Tabs/Tabs';
+import {StatusBar} from 'react-native';
 
 const Stack = createNativeStackNavigator();
 
@@ -16,8 +17,8 @@ const App = () => {
           options={{headerShown: false}}
         />
         <Stack.Screen
-          name="HomeScreen"
-          component={HomeScreen}
+          name="Tabs"
+          component={Tabs}
           options={{headerShown: false}}
         />
       </Stack.Navigator>

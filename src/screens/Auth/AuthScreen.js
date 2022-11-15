@@ -13,7 +13,7 @@ const AuthScreen = ({navigation}) => {
     <View style={styles.scaffold}>
       <Image
         style={styles.image}
-        source={require('OneriverApp/images/oneriver_icon.png')}
+        source={require('OneriverApp/src/images/oneriver_icon.png')}
       />
       <Text style={styles.welcomeText}>Welcome to Oneriver</Text>
       <View>
@@ -26,7 +26,7 @@ const AuthScreen = ({navigation}) => {
       </View>
       <TouchableOpacity
         style={styles.loginbutton}
-        onPress={() => navigation.navigate('HomeScreen')}>
+        onPress={() => navigation.navigate('Tabs')}>
         <Text style={styles.loginButtonText}>Login</Text>
       </TouchableOpacity>
     </View>
