@@ -9,7 +9,7 @@ import {
   FlatList,
 } from 'react-native';
 
-const WalletScreen = () => {
+const WalletScreen = ({navigation}) => {
   const [filterValue, setFilterValue] = useState('All');
   const currentWalletItemList = useSelector(state => state.item.value);
 
@@ -49,7 +49,10 @@ const WalletScreen = () => {
   return (
     <View style={styles.scaffold}>
       <View style={styles.appBar}>
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.openDrawer();
+          }}>
           <Image source={require('OneriverApp/src/images/drawer_icon.png')} />
         </TouchableOpacity>
         <Image source={require('OneriverApp/src/images/search_icon.png')} />

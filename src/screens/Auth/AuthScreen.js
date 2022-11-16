@@ -18,7 +18,7 @@ const AuthScreen = ({navigation}) => {
     if (userMail !== '' && password !== '') {
       signIn(userMail, password)
         .then(() => {
-          navigation.navigate('Tabs');
+          navigation.navigate('Drawers');
         })
         .catch(e => {
           alert(signInErrorMessage(e));

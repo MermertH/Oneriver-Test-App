@@ -2,7 +2,7 @@ import * as React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import AuthScreen from './src/screens/Auth/AuthScreen';
-import Tabs from './src/screens/Tabs/Tabs';
+import Drawers from './src/screens/Tabs/Drawers';
 
 const Stack = createNativeStackNavigator();
 
@@ -16,8 +16,8 @@ const App = () => {
           options={{headerShown: false}}
         />
         <Stack.Screen
-          name="Tabs"
-          component={Tabs}
+          name="Drawers"
+          component={Drawers}
           options={{headerShown: false}}
         />
       </Stack.Navigator>

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {add, increaseAmount} from 'OneriverApp/src/config/addItemSlice';
 import {
@@ -11,10 +11,16 @@ import {
 } from 'react-native';
 import listData from 'OneriverApp/data.json';
 
-const HomeScreen = () => {
+const HomeScreen = ({navigation}) => {
   const [filterValue, setFilterValue] = useState('All');
   const dispatch = useDispatch();
   const currentWalletItemList = useSelector(state => state.item.value);
+
+  useEffect(() => {
+    navigation.addListener('beforeRemove', e => {
+      e.preventDefault();
+    });
+  });
 
   const invokeAction = aquiredItem => {
     let itemExist = false;
@@ -74,7 +80,10 @@ const HomeScreen = () => {
   return (
     <View style={styles.scaffold}>
       <View style={styles.appBar}>
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.openDrawer();
+          }}>
           <Image source={require('OneriverApp/src/images/drawer_icon.png')} />
         </TouchableOpacity>
         <Image source={require('OneriverApp/src/images/search_icon.png')} />
