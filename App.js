@@ -8,21 +8,20 @@ const Stack = createNativeStackNavigator();
 
 const App = () => {
   return (
-      <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen
-            name="AuthScreen"
-            component={AuthScreen}
-            options={{headerShown: false}}
-          />
-          <Stack.Screen
-            name="Tabs"
-            component={Tabs}
-            options={{headerShown: false}}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
-
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="AuthScreen">
+        <Stack.Screen
+          name="AuthScreen"
+          component={AuthScreen}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Tabs"
+          component={Tabs}
+          options={{headerShown: false}}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 };
 

@@ -1,4 +1,6 @@
 import React from 'react';
+import {signIn} from '../../config/firebase';
+import {useState} from 'react';
 import {
   StyleSheet,
   View,
@@ -9,6 +11,36 @@ import {
 } from 'react-native';
 
 const AuthScreen = ({navigation}) => {
+  const [userMail, setUserMail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const signInCheck = () => {
+    if (userMail !== '' && password !== '') {
+      signIn(userMail, password)
+        .then(() => {
+          navigation.navigate('Tabs');
+        })
+        .catch(e => {
+          alert(signInErrorMessage(e));
+        });
+    } else {
+      alert('Username or password cannot be blank!');
+    }
+  };
+
+  const signInErrorMessage = error => {
+    switch (error.code) {
+      case 'auth/invalid-email':
+        return 'Email adress is not valid!';
+      case 'auth/user-not-found':
+        return 'there is no user corresponding to the given email.';
+      case 'auth/wrong-password':
+        return 'Password is not valid!';
+      default:
+        return 'Unknown error occured';
+    }
+  };
+
   return (
     <View style={styles.scaffold}>
       <Image
@@ -18,15 +50,24 @@ const AuthScreen = ({navigation}) => {
       <Text style={styles.welcomeText}>Welcome to Oneriver</Text>
       <View>
         <Text style={styles.textInputEmailLabel}>E-Mail</Text>
-        <TextInput style={styles.textInput} />
+        <TextInput
+          style={styles.textInput}
+          value={userMail}
+          onChangeText={text => setUserMail(text)}
+        />
       </View>
       <View>
         <Text style={styles.textInputPasswordLabel}>Password</Text>
-        <TextInput style={styles.textInput} />
+        <TextInput
+          style={styles.textInput}
+          value={password}
+          secureTextEntry={true}
+          onChangeText={text => setPassword(text)}
+        />
       </View>
       <TouchableOpacity
         style={styles.loginbutton}
-        onPress={() => navigation.navigate('Tabs')}>
+        onPress={() => signInCheck()}>
         <Text style={styles.loginButtonText}>Login</Text>
       </TouchableOpacity>
     </View>
