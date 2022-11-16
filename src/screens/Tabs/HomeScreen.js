@@ -1,4 +1,6 @@
 import React, {useState} from 'react';
+import {useSelector, useDispatch} from 'react-redux';
+import {add, increaseAmount} from 'OneriverApp/src/config/addItemSlice';
 import {
   View,
   StyleSheet,
@@ -11,6 +13,63 @@ import listData from 'OneriverApp/data.json';
 
 const HomeScreen = () => {
   const [filterValue, setFilterValue] = useState('All');
+  const dispatch = useDispatch();
+  const currentWalletItemList = useSelector(state => state.item.value);
+
+  const invokeAction = aquiredItem => {
+    let itemExist = false;
+    for (let index = 0; index < currentWalletItemList.length; index++) {
+      if (currentWalletItemList[index].name === aquiredItem.name) {
+        itemExist = true;
+        break;
+      }
+    }
+    if (itemExist) {
+      dispatch(increaseAmount(aquiredItem));
+    } else {
+      aquiredItem.amount = 1;
+      dispatch(add(aquiredItem));
+    }
+  };
+
+  const getFilteredList = (list, value) => {
+    let filteredList = [];
+    for (let index = 0; index < list.length; index++) {
+      if (list[index].type === value || value === 'All') {
+        filteredList.push(list[index]);
+      }
+    }
+    return filteredList;
+  };
+
+  const getCorrectIcon = name => {
+    switch (name) {
+      case 'BTC':
+        return require('OneriverApp/src/images/crypto-currency/btc_icon.png');
+      case 'ETH':
+        return require('OneriverApp/src/images/crypto-currency/eth_icon.png');
+      case 'BNB':
+        return require('OneriverApp/src/images/crypto-currency/bnb_icon.png');
+      case 'XRP':
+        return require('OneriverApp/src/images/crypto-currency/xrp_icon.png');
+      case 'USDT':
+        return require('OneriverApp/src/images/crypto-currency/usdt_icon.png');
+      case 'TRY':
+        return require('OneriverApp/src/images/crypto-currency/try_icon.png');
+      default:
+        return require('OneriverApp/src/images/crypto-currency/btc_icon.png');
+    }
+  };
+
+  const checkOverralIncrease = bool => {
+    return bool
+      ? styles.listItemPercentangeTextRise
+      : styles.listItemPercentangeTextDown;
+  };
+
+  const checkIfSelected = (value, type) => {
+    return value === type ? styles.buttonTextSelected : styles.buttonTextNormal;
+  };
 
   return (
     <View style={styles.scaffold}>
@@ -70,7 +129,15 @@ const HomeScreen = () => {
                   {item.percentage}
                 </Text>
               </View>
-              <TouchableOpacity style={styles.buyButtonStyle}>
+              <TouchableOpacity
+                style={styles.buyButtonStyle}
+                onPress={() =>
+                  invokeAction({
+                    name: item.name,
+                    value: item.value,
+                    type: item.type,
+                  })
+                }>
                 <Text style={styles.buyButtonTextStyle}>Buy</Text>
               </TouchableOpacity>
             </View>
@@ -79,45 +146,6 @@ const HomeScreen = () => {
       </View>
     </View>
   );
-};
-
-const getFilteredList = (list, value) => {
-  let filteredList = [];
-  for (let index = 0; index < list.length; index++) {
-    if (list[index].type === value || value === 'All') {
-      filteredList.push(list[index]);
-    }
-  }
-  return filteredList;
-};
-
-const getCorrectIcon = name => {
-  switch (name) {
-    case 'BTC':
-      return require('OneriverApp/src/images/crypto-currency/btc_icon.png');
-    case 'ETH':
-      return require('OneriverApp/src/images/crypto-currency/eth_icon.png');
-    case 'BNB':
-      return require('OneriverApp/src/images/crypto-currency/bnb_icon.png');
-    case 'XRP':
-      return require('OneriverApp/src/images/crypto-currency/xrp_icon.png');
-    case 'USDT':
-      return require('OneriverApp/src/images/crypto-currency/usdt_icon.png');
-    case 'TRY':
-      return require('OneriverApp/src/images/crypto-currency/try_icon.png');
-    default:
-      return require('OneriverApp/src/images/crypto-currency/btc_icon.png');
-  }
-};
-
-const checkOverralIncrease = bool => {
-  return bool
-    ? styles.listItemPercentangeTextRise
-    : styles.listItemPercentangeTextDown;
-};
-
-const checkIfSelected = (value, type) => {
-  return value === type ? styles.buttonTextSelected : styles.buttonTextNormal;
 };
 
 const styles = StyleSheet.create({

@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {useSelector} from 'react-redux';
 import {
   View,
   StyleSheet,
@@ -10,6 +11,40 @@ import {
 
 const WalletScreen = () => {
   const [filterValue, setFilterValue] = useState('All');
+  const currentWalletItemList = useSelector(state => state.item.value);
+
+  const getFilteredList = (list, value) => {
+    let filteredList = [];
+    for (let index = 0; index < list.length; index++) {
+      if (list[index].type === value || value === 'All') {
+        filteredList.push(list[index]);
+      }
+    }
+    return filteredList;
+  };
+
+  const getCorrectIcon = name => {
+    switch (name) {
+      case 'BTC':
+        return require('OneriverApp/src/images/crypto-currency/btc_icon.png');
+      case 'ETH':
+        return require('OneriverApp/src/images/crypto-currency/eth_icon.png');
+      case 'BNB':
+        return require('OneriverApp/src/images/crypto-currency/bnb_icon.png');
+      case 'XRP':
+        return require('OneriverApp/src/images/crypto-currency/xrp_icon.png');
+      case 'USDT':
+        return require('OneriverApp/src/images/crypto-currency/usdt_icon.png');
+      case 'TRY':
+        return require('OneriverApp/src/images/crypto-currency/try_icon.png');
+      default:
+        return require('OneriverApp/src/images/crypto-currency/btc_icon.png');
+    }
+  };
+
+  const checkIfSelected = (value, type) => {
+    return value === type ? styles.buttonTextSelected : styles.buttonTextNormal;
+  };
 
   return (
     <View style={styles.scaffold}>
@@ -51,23 +86,7 @@ const WalletScreen = () => {
       <View style={styles.listArea}>
         <FlatList
           showsVerticalScrollIndicator={false}
-          data={getFilteredList(
-            [
-              {
-                name: 'BTC',
-                value: '16,923.68',
-                amount: '3',
-                type: 'Crypto',
-              },
-              {
-                name: 'TRY',
-                value: '0,054',
-                amount: '300',
-                type: 'Currency',
-              },
-            ],
-            filterValue,
-          )}
+          data={getFilteredList(currentWalletItemList, filterValue)}
           renderItem={({item}) => (
             <View style={styles.listItemStyle}>
               <View style={styles.iconAndNameView}>
@@ -89,39 +108,6 @@ const WalletScreen = () => {
       </View>
     </View>
   );
-};
-
-const getFilteredList = (list, value) => {
-  let filteredList = [];
-  for (let index = 0; index < list.length; index++) {
-    if (list[index].type === value || value === 'All') {
-      filteredList.push(list[index]);
-    }
-  }
-  return filteredList;
-};
-
-const getCorrectIcon = name => {
-  switch (name) {
-    case 'BTC':
-      return require('OneriverApp/src/images/crypto-currency/btc_icon.png');
-    case 'ETH':
-      return require('OneriverApp/src/images/crypto-currency/eth_icon.png');
-    case 'BNB':
-      return require('OneriverApp/src/images/crypto-currency/bnb_icon.png');
-    case 'XRP':
-      return require('OneriverApp/src/images/crypto-currency/xrp_icon.png');
-    case 'USDT':
-      return require('OneriverApp/src/images/crypto-currency/usdt_icon.png');
-    case 'TRY':
-      return require('OneriverApp/src/images/crypto-currency/try_icon.png');
-    default:
-      return require('OneriverApp/src/images/crypto-currency/btc_icon.png');
-  }
-};
-
-const checkIfSelected = (value, type) => {
-  return value === type ? styles.buttonTextSelected : styles.buttonTextNormal;
 };
 
 const styles = StyleSheet.create({
